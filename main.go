@@ -3,41 +3,17 @@ package main
 import (
 	"net/http"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	// Echo instance
-	e := echo.New()
-
-	// Middleware
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
-	// Routes
-	e.GET("/", Hello)
-	e.GET("/get-student", GetStudent)
-	e.GET("/get-grade", GetGrade)
-	e.GET("/get-teacher", GetTeacher)
-
-	// Start server
-	e.Logger.Fatal(e.Start(":8080"))
+	r := gin.Default()
+	r.GET("/", Hello)
+	r.Run(":8080")
 }
 
 // Handler
-func Hello(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
-}
-
-func GetStudent(c echo.Context) error {
-	return c.String(http.StatusOK, "Test API Get Student.")
-}
-
-func GetGrade(c echo.Context) error {
-	return c.String(http.StatusOK, "Test API Get Grade.")
-}
-
-func GetTeacher(c echo.Context) error {
-	return c.String(http.StatusOK, "Test API Get Teacher.")
+func Hello(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "Hello, World!"})
 }
