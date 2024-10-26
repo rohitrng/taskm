@@ -25,6 +25,7 @@ func Login(c *gin.Context) {
 	var emps []Emp
 	for res.Next() {
 		var emp Emp
+		res.Scan(&emp.Username, &emp.Age)
 		emps = append(emps, Emp{emp.Username, emp.Age})
 	}
 	c.JSON(http.StatusOK, gin.H{"message": emps})
