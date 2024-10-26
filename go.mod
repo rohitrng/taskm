@@ -1,4 +1,4 @@
-module tutor/go-docker-simple
+module rngdev
 
 go 1.19
 
