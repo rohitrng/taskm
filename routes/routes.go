@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func api() {
+func Api() {
 	r := gin.Default()
 	r.GET("/", handler.Login)
 	r.Run(":8080")
