@@ -8,6 +8,6 @@ import (
 
 func Api() {
 	r := gin.Default()
-	r.GET("/", handler.Login)
+	r.POST("/login", handler.Login)
 	r.Run(":8080")
 }

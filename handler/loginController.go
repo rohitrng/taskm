@@ -9,24 +9,27 @@ import (
 
 type Emp struct {
 	Username string `json:"name"`
-	Age      string `json:"age"`
+	Id       string `json:"id"`
 }
 
 func Login(c *gin.Context) {
+	username := c.Query("username")
+	password := c.Query("password")
+
 	db, err := db.Connect()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 	}
 
-	res, err := db.Query("select username , age from users")
+	res, err := db.Query("select username, id from users where username = ? and password = ?", username, password)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 	}
-	var emps []Emp
+
+	var emp Emp
 	for res.Next() {
-		var emp Emp
-		res.Scan(&emp.Username, &emp.Age)
-		emps = append(emps, Emp{emp.Username, emp.Age})
+		res.Scan(&emp.Username, &emp.Id)
 	}
-	c.JSON(http.StatusOK, gin.H{"message": emps})
+
+	c.JSON(http.StatusOK, gin.H{"message": emp})
 }
