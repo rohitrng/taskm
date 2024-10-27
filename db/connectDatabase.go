@@ -8,7 +8,7 @@ import (
 )
 
 func Connect() (*sql.DB, error) {
-	db, err := sql.Open("mysql", "rediss:AU6KAAIjcDFmM2JkODBkNmY4ZmU0YTI3OGQwYWFlMTY1NGRiNGE4M3AxMA@tcp(guided-guppy-20106.upstash.io:6379)/go_testing")
+	db, err := sql.Open("mysql", "sql12741017:rMjHllcWYj@tcp(sql12.freesqldatabase.com:3306)/sql12741017")
 	if err != nil {
 		return nil, errors.New(err.Error())
 	}
