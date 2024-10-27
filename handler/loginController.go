@@ -27,9 +27,14 @@ func Login(c *gin.Context) {
 	}
 
 	var emp Emp
-	for res.Next() {
-		res.Scan(&emp.Username, &emp.Id)
+	if res.Next() {
+		err := res.Scan(&emp.Username, &emp.Id)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"message": emp})
+	} else {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "Invalid username or password"})
 	}
-
-	c.JSON(http.StatusOK, gin.H{"message": emp})
 }
