@@ -13,8 +13,8 @@ type Emp struct {
 }
 
 func Login(c *gin.Context) {
-	username := c.Query("username")
-	password := c.Query("password")
+	username := c.PostForm("username")
+	password := c.PostForm("password")
 
 	db, err := db.Connect()
 	if err != nil {
@@ -25,6 +25,7 @@ func Login(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 	}
+	defer res.Close()
 
 	var emp Emp
 	if res.Next() {
