@@ -2,8 +2,12 @@ package main
 
 import (
 	"rngdev/routes"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	routes.Api()
+	route := gin.Default()
+	routes.SetupRoutes(route)
+	route.Run(":8081")
 }

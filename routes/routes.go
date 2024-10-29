@@ -1,13 +1,11 @@
 package routes
 
 import (
-	"rngdev/handler"
+	"rngdev/controllers"
 
 	"github.com/gin-gonic/gin"
 )
 
-func Api() {
-	r := gin.Default()
-	r.POST("/login", handler.Login)
-	r.Run(":8080")
+func SetupRoutes(r *gin.Engine) {
+	r.POST("/register", controllers.Register)
 }
