@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"database/sql"
 	"net/http"
 	"rngdev/config"
 	"rngdev/models"
@@ -33,5 +34,17 @@ func Register(c *gin.Context) {
 }
 
 func Check(c *gin.Context) {
-	c.JSON(http.StatusCreated, gin.H{"message": "Connect successfully"})
+	db, err := sql.Open("mysql", "rngdev_data:-~BGo-zuX5Yb@tcp(68.178.150.12:3306)/task_management")
+	// db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/go_test")
+
+	if err != nil {
+		c.JSON(http.StatusCreated, gin.H{"message": err})
+		return
+	}
+
+	if err = db.Ping(); err != nil {
+		c.JSON(http.StatusCreated, gin.H{"message": err})
+		return
+	}
+	c.JSON(http.StatusCreated, gin.H{"message": "Connected to MySQL"})
 }
