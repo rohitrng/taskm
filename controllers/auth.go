@@ -31,3 +31,7 @@ func Register(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, gin.H{"message": "User registered successfully"})
 }
+
+func Check(c *gin.Context) {
+	c.JSON(http.StatusCreated, gin.H{"message": "Connect successfully"})
+}
