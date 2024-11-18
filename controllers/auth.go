@@ -34,7 +34,8 @@ func Register(c *gin.Context) {
 }
 
 func Check(c *gin.Context) {
-	db, err := sql.Open("mysql", "rngdev_data:-~BGo-zuX5Yb@tcp(68.178.150.12:3306)/task_management")
+	db, err := sql.Open("mysql", "103.185.160.244:@tcp(localhost:3306)/task_management")
+	// db, err := sql.Open("mysql", "rngdev_data:-~BGo-zuX5Yb@tcp(68.178.150.12:3306)/task_management")
 	// db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/go_test")
 
 	if err != nil {
