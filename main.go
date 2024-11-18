@@ -10,6 +10,6 @@ func main() {
 	route := gin.Default()
 	routes.SetupRoutes(route)
 	// route.Run(":8081")
-	route.Run(":8080")
+	route.Run(":8089")
 
 }
